@@ -12,9 +12,14 @@ app.get('/', (req, res) => res.status(400).send("Missing user ID path. Try /your
 
 app.get('/:user', (req, res) => {
 
-  let output = "<ul>";
+  let output = `<!doctype HTML><head><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></head>`;
 
-  request('https://scholar.google.co.uk/citations?user=' + req.params.user, function (error, response, body) {
+  output += "<ul>";
+
+  request.get({
+    uri: 'https://scholar.google.co.uk/citations?user=' + req.params.user,
+    encoding: "binary"
+  }, function (error, request, body) {
 
     let content = cheerio.load(body);
 
@@ -43,9 +48,8 @@ app.get('/:user', (req, res) => {
     </style>
 
     `;
-
+    
     res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
     res.end(output);
 
   });
