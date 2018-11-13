@@ -4,6 +4,10 @@ const cheerio = require('cheerio');
 const express = require('express')
 const app = express()
 
+const fs = require("fs");
+
+const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
+
 app.get('/:user', (req, res) => {
 
   let output = "<ul>";
@@ -46,4 +50,4 @@ app.get('/:user', (req, res) => {
 
 })
 
-app.listen(3000);
+app.listen(config.port);
