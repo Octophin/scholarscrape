@@ -8,6 +8,8 @@ const fs = require("fs");
 
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 
+app.get('/', (req, res) => res.status(400).send("Missing user ID path. Try /yourgooglescholarid"))
+
 app.get('/:user', (req, res) => {
 
   let output = "<ul>";
