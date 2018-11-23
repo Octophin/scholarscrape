@@ -6,11 +6,19 @@ const app = express()
 
 const fs = require("fs");
 
+let cache = {};
+
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 
 app.get('/', (req, res) => res.status(400).send("Missing user ID path. Try /yourgooglescholarid"))
 
 app.get('/:user', (req, res) => {
+
+  if (cache[req.params.user]) {
+
+   return res.send(cache[req.params.user]);
+
+  }
 
   let output = `<!doctype HTML><head><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></head>`;
 
@@ -48,9 +56,11 @@ app.get('/:user', (req, res) => {
     </style>
 
     `;
-    
+
     res.statusCode = 200;
     res.end(output);
+
+    cache[req.params.user] = output;
 
   });
 
