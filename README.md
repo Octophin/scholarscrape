@@ -1,6 +1,6 @@
 # ScholarScrape
 
-Basic node.js based Google Scholar scraper with built-in caching.
+Basic node.js based Google Scholar citations scraper with built-in caching. [Demo here fetching Einstein's citations](https://scholarscrape.octophindigital.com/qc6CJjYAAAAJ&hl=en)
 
 # Requirements
 
