@@ -17,7 +17,7 @@ Basic node.js based Google Scholar citations scraper with built-in caching. [Dem
 
 # Usage
 
-* Only one URL endpoint is available, the Google Scholar ID. For example `http://localhost:7888/qc6CJjYAAAAJ&hl`.
+* Only one URL endpoint is available, the Google Scholar ID. For example `http://localhost:7888/qc6CJjYAAAAJ&hl`
 * Everything is output as one aggregated file with static HTML and CSS for easy embedding.
 
 # Customisation / styling
