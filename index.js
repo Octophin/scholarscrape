@@ -25,7 +25,7 @@ app.get('/:user', (req, res) => {
   output += "<ul>";
 
   request.get({
-    uri: 'https://scholar.google.co.uk/citations?user=' + req.params.user,
+    uri: 'https://scholar.google.co.uk/citations?user=' + req.params.user + "&sortby=pubdate",
     encoding: "binary"
   }, function (error, request, body) {
 
