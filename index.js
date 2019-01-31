@@ -1,20 +1,26 @@
-const request = require("request");
-const cheerio = require('cheerio');
+// Load dependencies
 
-const express = require('express');
-const app = express();
+const request = require("request"), // Simplify HTTP requests
+  cheerio = require('cheerio'), // Parse HTML
+  express = require('express'), // Web server
+  fs = require("fs"), // Read from file system
+  app = express(); // Initialise app
 
-const fs = require("fs");
-
-let cache = {};
+// Load in configuration file
 
 const config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 
-app.get('/', (req, res) => res.status(400).send("Missing user ID path. Try /yourgooglescholarid"));
+// Store in memory cache object keyed by author id
 
-app.get('/:user', (req, res) => {
+let cache = {};
 
-  if (cache[req.params.user]) {
+// Endpoint for Google Scholar ID
+
+app.get('/:scholarID', (req, res) => {
+
+  // Check if in cache, if so send
+
+  if (cache[req.params.scholarID]) {
 
     return res.send(cache[req.params.user]);
 
@@ -22,8 +28,12 @@ app.get('/:user', (req, res) => {
 
   let output = `<!doctype HTML><head><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"></head>`;
 
+  // Add stylesheet from file
+
+  output += "<style>" + fs.readFileSync("style.css", "utf8") + "</style>";
+
   request.get({
-    uri: 'https://scholar.google.co.uk/citations?user=' + req.params.user + "&sortby=pubdate",
+    uri: 'https://scholar.google.co.uk/citations?user=' + req.params.scholarID + "&sortby=pubdate",
     encoding: "binary"
   }, function (error, request, body) {
 
@@ -55,6 +65,8 @@ app.get('/:user', (req, res) => {
 
     res.statusCode = 200;
     res.end(output);
+
+    // Store in cache
 
     cache[req.params.user] = output;
 
