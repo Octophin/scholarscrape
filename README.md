@@ -12,7 +12,7 @@ Basic node.js based Google Scholar scraper with built-in caching.
 * Git Clone or Download
 * Run `npm install`
 * Add port you wish server to run on to `config.json`
-* Add how long each scholar ID's data should be kept as cacheDays in `config.json`
+* Add how long each scholar ID's data should be kept as `cacheDays` in `config.json`
 * Run `node index.js` to run webserver on selected port on localhost, e.g `localhost:2888'
 
 # Usage
