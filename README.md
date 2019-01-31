@@ -9,7 +9,7 @@ Basic node.js based Google Scholar citations scraper with built-in caching. [Dem
 
 # Installation
 
-* Git Clone or Download
+* `git clone` or download
 * Run `npm install`
 * Add port you wish server to run on to `config.json`
 * Add how long each scholar ID's data should be kept as `cacheDays` in `config.json`
