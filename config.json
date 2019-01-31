@@ -1,3 +1,4 @@
 {
-  "port": 7888
+  "port": 7888,
+  "cacheDays": 1
 }

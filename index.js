@@ -74,4 +74,14 @@ app.get('/:scholarID', (req, res) => {
 
 });
 
+// Clear cache after cachedays count in config
+
+let cacheDays = 1000 * 60 * 60 * 24 * config.cacheDays;
+
+setInterval(() => {
+
+  cache = {};
+
+}, cacheDays);
+
 app.listen(config.port);
